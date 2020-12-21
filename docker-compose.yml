@@ -1,0 +1,9 @@
+services:
+  web:
+    build: .
+    image: odinsonlyeye/roommate-manager
+    ports:
+      - 5000:5000
+    environment:
+      FLASK_APP: app.py
+      FLASK_ENVIRONMENT: development
