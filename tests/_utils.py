@@ -5,7 +5,7 @@ from typing import Iterable
 import pytest
 import yaml
 
-from env import compose_file_path
+from roommate_manager.env import compose_file_path
 
 
 def assert_file_exists(f: Path) -> None:
