@@ -1,2 +1,5 @@
 flask
 tinydb
+pytest
+pyyaml
+requests
