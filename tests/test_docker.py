@@ -11,4 +11,4 @@ def test_local_docker_server_is_up():
 @pytest.mark.slow
 def test_build_from_compose_file():
     cmd = ["docker-compose", "build"]
-    assert_command_runs_and_exits_ok(cmd, "failed to build from compose file", timeout=30)
+    assert_command_runs_and_exits_ok(cmd, "failed to build from compose file", timeout=180)

@@ -1,5 +1,5 @@
-from const import WEB_SERVICE_NAME
-from env import working_dir_path, compose_file_path
+from roommate_manager.const import WEB_SERVICE_NAME
+from roommate_manager.env import working_dir_path, compose_file_path
 from tests._utils import assert_file_exists, assert_in
 
 
