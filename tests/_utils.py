@@ -38,6 +38,7 @@ def stop_web_service() -> None:
 
 
 def start_web_service() -> None:
-    cmd = ["docker-compose", "start", "web"]
-    subprocess.check_call(cmd)
-    return
+    assert_command_runs_and_exits_ok(
+        ["docker-compose", "start", "web"],
+        'Web service failed to start. Try running "docker-compose build" from the project root.',
+    )
