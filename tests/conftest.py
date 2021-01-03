@@ -1,14 +1,13 @@
+import subprocess
 import time
 
 from pytest import fixture
 
-from tests._utils import get_compose_file_contents, start_web_service, stop_web_service
+from tests._utils import get_compose_file_contents, stop_web_service, start_web_service
 
 
 @fixture
 def web_service_up(scope="module") -> None:
-    stop_web_service()
-    time.sleep(1)
     start_web_service()
     time.sleep(1)
     yield

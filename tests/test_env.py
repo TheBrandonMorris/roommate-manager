@@ -13,4 +13,3 @@ def test_docker_compose_file_exists_in_working_dir():
 
 def test_compose_file_contains_web_service(compose_file_services):
     assert_in(WEB_SERVICE_NAME, compose_file_services.keys())
-

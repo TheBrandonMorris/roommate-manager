@@ -24,11 +24,11 @@ def get_compose_file_contents() -> dict:
     return yaml.safe_load(compose_file_path.read_text())
 
 
-def assert_command_runs_and_exits_ok(cmd: list[str], fail_msg="", timeout=10) -> None:
-    try:
-        subprocess.check_call(cmd, timeout=timeout)
-    except subprocess.SubprocessError:
-        pytest.fail(fail_msg, pytrace=False)
+def assert_docker_command_runs_and_exits_ok(cmd: list[str], *, timeout=10.0):
+    proc = subprocess.run(cmd, timeout=timeout)
+    if proc.returncode is not 0:
+        err_out = f"{proc.stderr.decode()}"
+        pytest.fail(err_out, pytrace=False)
 
 
 def stop_web_service() -> None:
@@ -38,7 +38,14 @@ def stop_web_service() -> None:
 
 
 def start_web_service() -> None:
-    assert_command_runs_and_exits_ok(
-        ["docker-compose", "start", "web"],
-        'Web service failed to start. Try running "docker-compose build" from the project root.',
-    )
+    subprocess.call(["docker-compose", "up", "-d", "web"], timeout=120)
+
+
+def list_running_containers() -> list[str]:
+    cmd = ["docker", "ps"]
+    return list(
+        map(
+            lambda x: x.split()[-1],
+            subprocess.check_output(cmd).decode("UTF-8").splitlines(),
+        )
+    )[1:]
